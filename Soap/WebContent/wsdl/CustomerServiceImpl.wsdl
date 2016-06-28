@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://epamlab.by" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://epamlab.by" xmlns:intf="http://epamlab.by" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://epamlab.by" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Customer">
+    <sequence>
+     <element name="eMail" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:int"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="phone" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_anyType">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://epamlab.by"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Vector">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getCustomerByIdRequest">
+
+      <wsdl:part name="id" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateCustomerRequest">
+
+      <wsdl:part name="id" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="name" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="phone" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="eMail" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateCustomerResponse">
+
+      <wsdl:part name="updateCustomerReturn" type="xsd:boolean">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByIdResponse">
+
+      <wsdl:part name="getCustomerByIdReturn" type="impl:Customer">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCustomerResponse">
+
+      <wsdl:part name="getAllCustomerReturn" type="impl:ArrayOf_xsd_anyType">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addNewCustomerResponse">
+
+      <wsdl:part name="addNewCustomerReturn" type="xsd:boolean">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addNewCustomerRequest">
+
+      <wsdl:part name="newCustomer" type="impl:Customer">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCustomerRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCustomerByIdRequest">
+
+      <wsdl:part name="id" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCustomerByIdResponse">
+
+      <wsdl:part name="removeCustomerByIdReturn" type="xsd:boolean">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CustomerServiceImpl">
+
+      <wsdl:operation name="getCustomerById" parameterOrder="id">
+
+         <wsdl:input message="impl:getCustomerByIdRequest" name="getCustomerByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCustomerByIdResponse" name="getCustomerByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addNewCustomer" parameterOrder="newCustomer">
+
+         <wsdl:input message="impl:addNewCustomerRequest" name="addNewCustomerRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addNewCustomerResponse" name="addNewCustomerResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateCustomer" parameterOrder="id name phone eMail">
+
+         <wsdl:input message="impl:updateCustomerRequest" name="updateCustomerRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateCustomerResponse" name="updateCustomerResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCustomer">
+
+         <wsdl:input message="impl:getAllCustomerRequest" name="getAllCustomerRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllCustomerResponse" name="getAllCustomerResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeCustomerById" parameterOrder="id">
+
+         <wsdl:input message="impl:removeCustomerByIdRequest" name="removeCustomerByIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeCustomerByIdResponse" name="removeCustomerByIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CustomerServiceImplSoapBinding" type="impl:CustomerServiceImpl">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getCustomerById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCustomerByIdRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCustomerByIdResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addNewCustomer">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addNewCustomerRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addNewCustomerResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateCustomer">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateCustomerRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateCustomerResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCustomer">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllCustomerRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllCustomerResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeCustomerById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeCustomerByIdRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeCustomerByIdResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://epamlab.by" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CustomerServiceImplService">
+
+      <wsdl:port binding="impl:CustomerServiceImplSoapBinding" name="CustomerServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/Soap/services/CustomerServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name='CustomerServiceImplService' targetNamespace='http://epamlab.by/' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:tns='http://epamlab.by/' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema targetNamespace='http://epamlab.by/' version='1.0' xmlns:tns='http://epamlab.by/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:element name='addNewCustomer' type='tns:addNewCustomer'/>
+   <xs:element name='addNewCustomerResponse' type='tns:addNewCustomerResponse'/>
+   <xs:element name='getAllCustomer' type='tns:getAllCustomer'/>
+   <xs:element name='getAllCustomerResponse' type='tns:getAllCustomerResponse'/>
+   <xs:element name='getCustomerById' type='tns:getCustomerById'/>
+   <xs:element name='getCustomerByIdResponse' type='tns:getCustomerByIdResponse'/>
+   <xs:element name='removeCustomerById' type='tns:removeCustomerById'/>
+   <xs:element name='removeCustomerByIdResponse' type='tns:removeCustomerByIdResponse'/>
+   <xs:element name='updateCustomer' type='tns:updateCustomer'/>
+   <xs:element name='updateCustomerResponse' type='tns:updateCustomerResponse'/>
+   <xs:complexType name='getAllCustomer'>
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name='getAllCustomerResponse'>
+    <xs:sequence>
+     <xs:element maxOccurs='unbounded' minOccurs='0' name='return' type='tns:customer'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='customer'>
+    <xs:sequence>
+     <xs:element name='id' type='xs:int'/>
+     <xs:element minOccurs='0' name='name' type='xs:string'/>
+     <xs:element minOccurs='0' name='phone' type='xs:string'/>
+     <xs:element minOccurs='0' name='eMail' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getCustomerById'>
+    <xs:sequence>
+     <xs:element name='arg0' type='xs:int'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getCustomerByIdResponse'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='return' type='tns:customer'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='addNewCustomer'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='arg0' type='tns:customer'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='addNewCustomerResponse'>
+    <xs:sequence>
+     <xs:element name='return' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='removeCustomerById'>
+    <xs:sequence>
+     <xs:element name='arg0' type='xs:int'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='removeCustomerByIdResponse'>
+    <xs:sequence>
+     <xs:element name='return' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='updateCustomer'>
+    <xs:sequence>
+     <xs:element name='arg0' type='xs:int'/>
+     <xs:element minOccurs='0' name='arg1' type='xs:string'/>
+     <xs:element minOccurs='0' name='arg2' type='xs:string'/>
+     <xs:element minOccurs='0' name='arg3' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='updateCustomerResponse'>
+    <xs:sequence>
+     <xs:element name='return' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='CustomersService_addNewCustomer'>
+  <part element='tns:addNewCustomer' name='addNewCustomer'/>
+ </message>
+ <message name='CustomersService_addNewCustomerResponse'>
+  <part element='tns:addNewCustomerResponse' name='addNewCustomerResponse'/>
+ </message>
+ <message name='CustomersService_getAllCustomer'>
+  <part element='tns:getAllCustomer' name='getAllCustomer'/>
+ </message>
+ <message name='CustomersService_getAllCustomerResponse'>
+  <part element='tns:getAllCustomerResponse' name='getAllCustomerResponse'/>
+ </message>
+ <message name='CustomersService_getCustomerById'>
+  <part element='tns:getCustomerById' name='getCustomerById'/>
+ </message>
+ <message name='CustomersService_getCustomerByIdResponse'>
+  <part element='tns:getCustomerByIdResponse' name='getCustomerByIdResponse'/>
+ </message>
+ <message name='CustomersService_removeCustomerById'>
+  <part element='tns:removeCustomerById' name='removeCustomerById'/>
+ </message>
+ <message name='CustomersService_removeCustomerByIdResponse'>
+  <part element='tns:removeCustomerByIdResponse' name='removeCustomerByIdResponse'/>
+ </message>
+ <message name='CustomersService_updateCustomer'>
+  <part element='tns:updateCustomer' name='updateCustomer'/>
+ </message>
+ <message name='CustomersService_updateCustomerResponse'>
+  <part element='tns:updateCustomerResponse' name='updateCustomerResponse'/>
+ </message>
+ <portType name='CustomersService'>
+  <operation name='addNewCustomer' parameterOrder='addNewCustomer'>
+   <input message='tns:CustomersService_addNewCustomer'/>
+   <output message='tns:CustomersService_addNewCustomerResponse'/>
+  </operation>
+  <operation name='getAllCustomer' parameterOrder='getAllCustomer'>
+   <input message='tns:CustomersService_getAllCustomer'/>
+   <output message='tns:CustomersService_getAllCustomerResponse'/>
+  </operation>
+  <operation name='getCustomerById' parameterOrder='getCustomerById'>
+   <input message='tns:CustomersService_getCustomerById'/>
+   <output message='tns:CustomersService_getCustomerByIdResponse'/>
+  </operation>
+  <operation name='removeCustomerById' parameterOrder='removeCustomerById'>
+   <input message='tns:CustomersService_removeCustomerById'/>
+   <output message='tns:CustomersService_removeCustomerByIdResponse'/>
+  </operation>
+  <operation name='updateCustomer' parameterOrder='updateCustomer'>
+   <input message='tns:CustomersService_updateCustomer'/>
+   <output message='tns:CustomersService_updateCustomerResponse'/>
+  </operation>
+ </portType>
+ <binding name='CustomersServiceBinding' type='tns:CustomersService'>
+  <soap:binding style='document' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='addNewCustomer'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAllCustomer'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getCustomerById'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='removeCustomerById'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='updateCustomer'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='CustomerServiceImplService'>
+  <port binding='tns:CustomersServiceBinding' name='CustomerServiceImplPort'>
+   <soap:address location='REPLACE_WITH_ACTUAL_URL'/>
+  </port>
+ </service>
+</definitions>

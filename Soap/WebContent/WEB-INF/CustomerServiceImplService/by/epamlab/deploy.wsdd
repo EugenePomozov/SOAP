@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CustomerServiceImplService WSDL service -->
+
+  <service name="CustomerServiceImpl" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://epamlab.by"/>
+      <parameter name="wsdlServiceElement" value="CustomerServiceImplService"/>
+      <parameter name="schemaUnqualified" value="http://xml.apache.org/xml-soap,http://epamlab.by"/>
+      <parameter name="wsdlServicePort" value="CustomerServiceImpl"/>
+      <parameter name="className" value="by.epamlab.CustomerServiceImpl"/>
+      <parameter name="wsdlPortType" value="CustomerServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://epamlab.by" xmlns:rtns="http://epamlab.by" name="getCustomerById" qname="operNS:getCustomerById" returnQName="getCustomerByIdReturn" returnType="rtns:Customer" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://epamlab.by" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addNewCustomer" qname="operNS:addNewCustomer" returnQName="addNewCustomerReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:tns="http://epamlab.by" qname="newCustomer" type="tns:Customer"/>
+      </operation>
+      <operation xmlns:operNS="http://epamlab.by" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateCustomer" qname="operNS:updateCustomer" returnQName="updateCustomerReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="phone" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eMail" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://epamlab.by" xmlns:rtns="http://epamlab.by" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getAllCustomer" qname="operNS:getAllCustomer" returnQName="getAllCustomerReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://epamlab.by" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeCustomerById" qname="operNS:removeCustomerById" returnQName="removeCustomerByIdReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="getCustomerById removeCustomerById updateCustomer addNewCustomer getAllCustomer"/>
+
+      <arrayMapping xmlns:ns="http://epamlab.by" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <typeMapping xmlns:ns="http://epamlab.by" qname="ns:Customer" type="java:by.epamlab.Customer" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </service>
+</deployment>

@@ -1,0 +1,58 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CustomerServiceImplService WSDL service -->
+
+  <service name="CustomerServiceImpl" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://epamlab.by"/>
+      <parameter name="wsdlServiceElement" value="CustomerServiceImplService"/>
+      <parameter name="schemaUnqualified" value="http://xml.apache.org/xml-soap,http://epamlab.by"/>
+      <parameter name="wsdlServicePort" value="CustomerServiceImpl"/>
+      <parameter name="className" value="by.epamlab.CustomerServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="CustomerServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getCustomerById" qname="operNS:getCustomerById" xmlns:operNS="http://epamlab.by" returnQName="getCustomerByIdReturn" returnType="rtns:Customer" xmlns:rtns="http://epamlab.by" soapAction="" >
+        <parameter qname="id" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addNewCustomer" qname="operNS:addNewCustomer" xmlns:operNS="http://epamlab.by" returnQName="addNewCustomerReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="newCustomer" type="tns:Customer" xmlns:tns="http://epamlab.by"/>
+      </operation>
+      <operation name="updateCustomer" qname="operNS:updateCustomer" xmlns:operNS="http://epamlab.by" returnQName="updateCustomerReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="id" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="name" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="phone" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="eMail" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllCustomer" qname="operNS:getAllCustomer" xmlns:operNS="http://epamlab.by" returnQName="getAllCustomerReturn" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://epamlab.by" returnItemType="tns2:anyType" xmlns:tns2="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="removeCustomerById" qname="operNS:removeCustomerById" xmlns:operNS="http://epamlab.by" returnQName="removeCustomerByIdReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="id" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getCustomerById removeCustomerById updateCustomer addNewCustomer getAllCustomer"/>
+
+      <arrayMapping
+        xmlns:ns="http://epamlab.by"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://epamlab.by"
+        qname="ns:Customer"
+        type="java:by.epamlab.Customer"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>
